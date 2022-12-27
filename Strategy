@@ -1,0 +1,28 @@
+class Navigator:
+  def routeStrategy(self, strategy):
+    self.strategy = strategy
+
+  def Route(self, place1, place2):
+    print(self.strategy.buildRoute(place1, place2))
+
+class Road:
+  def buildRoute(self, place1, place2):
+    return f'Route from {place1} to {place2} on car is built'
+
+class PublicTransport:
+  def buildRoute(self, place1, place2):
+    return f'Route from {place1} to {place2} on public transport is built'
+
+class Walking:
+  def buildRoute(self, place1, place2):
+    return f'Route from {place1} to {place2} on foot is built' 
+
+navigator = Navigator()
+navigator.routeStrategy(Road())
+navigator.Route('Moscow', 'Ufa')
+
+navigator.routeStrategy(PublicTransport())
+navigator.Route('Moscow', 'Ufa')
+
+navigator.routeStrategy(Walking())
+navigator.Route('Moscow', 'Ufa')
