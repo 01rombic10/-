@@ -1,0 +1,79 @@
+from abc import ABC
+
+class Mediator(ABC):
+    def notify(self, event: str):
+        pass
+
+    def reactOnA(self):
+        pass      
+
+    def reactOnB(self):
+        pass
+
+    def reactOnC(self):
+        pass      
+
+    def reactOnD(self):
+        pass
+        
+class ConcreteMediator(Mediator):
+    def notify(self, event: str):
+        if event == 'A':
+            print('Mediator reacts on A and triggers component B')
+            return ConcreteMediator.reactOnA(self)
+        if event == 'B':
+            print('Mediator reacts on B and triggers component C')
+            return ConcreteMediator.reactOnB(self)
+        if event == 'C':
+            print('Mediator reacts on C and triggers component D')
+            return ConcreteMediator.reactOnC(self)
+        if event == 'D':
+            print('Mediator reacts on D and turns off')
+            return ConcreteMediator.reactOnD(self)
+        else:
+            print('Error')    
+
+    def reactOnA(self):        
+        return ComponentB.operationB(self)
+
+    def reactOnB(self):
+        return ComponentC.operationC(self)
+
+    def reactOnC(self):        
+        return ComponentD.operationD(self)
+
+    def reactOnD(self):
+        return 'turn off'
+
+class ComponentA:
+    def operationA(self):
+        print("Component A does A.")
+        ConcreteMediator.notify(self, "A")
+
+class ComponentB:    
+    def operationB(self):
+        print("Component B does B.")
+        ConcreteMediator.notify(self, "B")
+
+class ComponentC:
+    def operationC(self):
+        print("Component C does C.")
+        ConcreteMediator.notify(self, "C")
+
+class ComponentD:    
+    def operationD(self):
+        print("Component D does D.")
+        ConcreteMediator.notify(self, "D")
+
+componentA = ComponentA()
+componentB = ComponentB()
+componentC = ComponentC()
+componentD = ComponentD()
+
+componentA.operationA()
+print()
+componentB.operationB()
+print()
+componentC.operationC()
+print()
+componentD.operationD()
