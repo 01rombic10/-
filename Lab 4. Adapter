@@ -1,0 +1,33 @@
+# посчитать сколько долларов в день может тратить человек, получающий 1000 фунтов стерлингов в месяц
+from abc import ABC
+import forex_python.converter as fp
+
+currencyRate = fp.CurrencyRates()
+
+class ClientInterface(ABC):
+    def __init__(self, GBP_data):
+        self.GBP_data = GBP_data
+    def method(self):
+        pass
+
+# функция, конвертирующая фунты стерлингов в доллары по текущему курсу на форекс
+def convert_GBP_to_USD(GBP_data):
+    USD_data = GBP_data * currencyRate.get_rate('USD', 'GBP')
+    return USD_data
+
+# адаптер принимает данные в фунтах стерлингов и конвертирует их в подходящую валюту для сервиса
+class Adapter(ClientInterface):
+    def method(self):
+        USD_data = convert_GBP_to_USD(self.GBP_data)
+        return USD_data
+
+# сервис, принимающий данные в долларах и делящий общую сумму в месяц на количество дней
+class Service:
+    def __init__(self, USD_data):
+        self.USD_data = USD_data
+    def serviceMethod(self):
+        print(self.USD_data / 30)
+
+adapter = Adapter(1000)
+service = Service(adapter.method())
+service.serviceMethod()
