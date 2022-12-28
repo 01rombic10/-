@@ -1,0 +1,43 @@
+from abc import ABC, abstractmethod
+
+class Visitor(ABC):
+    @abstractmethod
+    def visit(self, e: 'Element'):
+        pass
+
+class ConcreteVisitor(Visitor):
+    def visit(self, e: 'Element'):
+        if e == Bank:
+            print('suggest fraud insurance')
+        elif e == Factory:
+            print('suggest fire insurance')
+        elif e == House:
+            print('suggest med insurance')
+        else:
+            print('Error')
+
+class Element(ABC):
+    def accept(self, v = Visitor):
+        pass
+
+class Bank(Element):
+    def accept(self, v = Visitor):
+        v.visit(Bank)
+
+class Factory(Element):
+    def accept(self, v = Visitor):
+        v.visit(Factory)
+
+class House(Element):
+    def accept(self, v = Visitor):
+        v.visit(House)
+
+bank = Bank()
+conc_visitor = ConcreteVisitor()
+bank.accept(conc_visitor)
+
+house = House()
+house.accept(conc_visitor)
+
+factory = Factory()
+factory.accept(conc_visitor)
