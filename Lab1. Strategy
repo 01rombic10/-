@@ -1,0 +1,33 @@
+from abc import ABC
+
+class RouteStrategy(ABC):
+    def buildRoute(self, place1, place2):
+        pass
+
+class Road(RouteStrategy):
+    def buildRoute(self, place1, place2):
+        print(f'Route from {place1} to {place2} on car is built')
+
+class PublicTransport(RouteStrategy):
+    def buildRoute(self, place1, place2):
+        print(f'Route from {place1} to {place2} on public transport is built')
+
+class Walking(RouteStrategy):
+    def buildRoute(self, place1, place2):
+        print(f'Route from {place1} to {place2} on foot is built') 
+
+class Navigator:
+    def __init__(self, strategy: RouteStrategy):
+        self.strategy = strategy
+
+    def Route(self, place1, place2):
+        self.strategy.buildRoute(place1, place2)
+
+navigator = Navigator(Road())
+navigator.Route('Moscow', 'Ufa')
+
+navigator = Navigator(PublicTransport())
+navigator.Route('Moscow', 'Ufa')
+
+navigator = Navigator(Walking())
+navigator.Route('Moscow', 'Ufa')
