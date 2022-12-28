@@ -1,0 +1,81 @@
+from abc import ABCMeta
+
+class Builder(metaclass=ABCMeta):
+    def buildStepA(self):
+        pass
+
+    def buildStepB(self):
+        pass
+
+    def buildStepC(self):
+        pass
+
+    def get_result(self):
+        pass
+
+class WoodenHouseBuilder(Builder):
+    def __init__(self):
+        self.whouse = WoodenHouse()
+
+    def buildStepA(self):
+        self.whouse.parts.append('build wooden floor')
+        return self
+
+    def buildStepB(self):
+        self.whouse.parts.append('build wooden walls')
+        return self
+
+    def buildStepC(self):
+        self.whouse.parts.append('build wooden roof')
+        return self
+
+    def get_result(self):
+        return self.whouse
+
+class WoodenHouse():
+    def __init__(self):
+        self.parts = []
+
+class StoneHouseBuilder(Builder):
+    def __init__(self):
+        self.shouse = StoneHouse()
+
+    def buildStepA(self):
+        self.shouse.parts.append('build stone floor')
+        return self
+
+    def buildStepB(self):
+        self.shouse.parts.append('build stone walls')
+        return self
+
+    def buildStepC(self):
+        self.shouse.parts.append('build stone roof')
+        return self
+
+    def get_result(self):
+        return self.shouse
+
+class StoneHouse():
+    def __init__(self):
+        self.parts = []
+
+class Director:
+    def __init__(self, builder: Builder):
+        self.builder = builder
+    def make(self):
+        self.builder.buildStepA()
+        self.builder.buildStepB()
+        self.builder.buildStepC()
+        return self.builder.get_result()
+
+director = Director(WoodenHouseBuilder())        
+house1 = director.make()
+print(house1)
+print(house1.parts)
+
+print()
+
+director = Director(StoneHouseBuilder()) 
+house2 = director.make()
+print(house2)
+print(house2.parts)
