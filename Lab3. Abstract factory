@@ -1,0 +1,92 @@
+from abc import ABC, abstractmethod
+
+class Chair(ABC):
+    @abstractmethod
+    def someChair(self):
+        pass
+
+class VictorianChair(Chair):
+    def someChair(self):  
+        print('victorian chair')
+
+class ModernChair(Chair):
+    def someChair(self):
+        print('modern chair')
+
+class CoffeeTable(ABC):
+    @abstractmethod
+    def someCoffeeTable(self):
+        pass
+
+class VictorianCoffeeTable(CoffeeTable):
+    def someCoffeeTable(self):  
+        print('victorian coffee table')
+
+class ModernCoffeeTable(CoffeeTable):
+    def someCoffeeTable(self):
+        print('modern coffee table')
+
+class Sofa(ABC):
+    @abstractmethod
+    def someSofa(self):
+        pass
+
+class VictorianSofa(Sofa):
+    def someSofa(self):  
+        print('victorian sofa')
+
+class ModernSofa(Sofa):
+    def someSofa(self):
+        print('modern sofa')
+
+class AbstractFactory(ABC):
+    @abstractmethod
+    def createChair(self):
+        pass
+
+    def createCoffeeTable(self):
+        pass
+
+    def createSofa(self):
+        pass
+
+class VictorianFactory(AbstractFactory):
+    def createChair(self):
+        return VictorianChair()
+
+    def createCoffeeTable(self):
+        return VictorianCoffeeTable()
+
+    def createSofa(self):
+        return VictorianSofa()
+
+class ModernFactory(AbstractFactory):
+    def createChair(self):
+        return ModernChair()
+
+    def createCoffeeTable(self):
+        return ModernCoffeeTable()
+    
+    def createSofa(self):
+        return ModernSofa()
+
+class Client:
+    def __init__(self, factory: AbstractFactory):
+        self.factory = factory
+    def apply(self, furniture):
+        if furniture == Chair:
+            return self.factory.createChair().someChair()
+        if furniture == CoffeeTable:
+            return self.factory.createCoffeeTable().someCoffeeTable()
+        if furniture == Sofa:
+            return self.factory.createSofa().someSofa()
+
+client_modern = Client(ModernFactory())
+client_modern.apply(Chair)
+client_modern.apply(CoffeeTable)
+client_modern.apply(Sofa)
+print()
+client_victorian = Client(VictorianFactory())
+client_victorian.apply(Chair)
+client_victorian.apply(CoffeeTable)
+client_victorian.apply(Sofa)
