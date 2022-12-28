@@ -1,0 +1,77 @@
+class DataMiner:
+    def mine(self):
+        self.openFile()
+        self.extractData()
+        self.parseData()
+        self.analyzeData()
+        self.sendReport()
+        self.closeFile()
+  
+    def openFile(self):
+        print('file is opened')
+
+    def extractData(self):
+        print('data is extracted from file')
+
+    def parseData(self):
+        print('data from file is parsed')
+
+    def analyzeData(self):
+        print('result of analysis')
+
+    def sendReport(self):
+        print('report')
+
+    def closeFile(self):
+        print('file is closed')
+    
+# PDF Data Miner
+class PDFDataMiner(DataMiner):
+    def openFile(self):
+        print('PDF file is opened')
+
+    def extractData(self):
+        print('data is extracted from PDF file')
+
+    def parseData(self):
+        print('data from PDF file is parsed')   
+
+    def closeFile(self):
+        print('PDF file is closed')
+
+# Doc Data Miner
+class DocDataMiner(DataMiner):
+    def openFile(self):
+        print('Doc file is opened')
+
+    def extractData(self):
+        print('data is extracted from Doc file')
+
+    def parseData(self):
+        print('data from Doc file is parsed')   
+
+    def closeFile(self):
+        print('Doc file is closed')
+
+# CSV Data Miner
+class CSVDataMiner(DataMiner):
+    def openFile(self):
+        print('CSV file is opened')
+
+    def extractData(self):
+        print('data is extracted from CSV file')
+
+    def parseData(self):
+        print('data from CSV file is parsed')   
+
+    def closeFile(self):
+        print('CSV file is closed')
+
+dataMiner = CSVDataMiner()
+dataMiner.mine()
+print()
+dataMiner = PDFDataMiner()
+dataMiner.mine()
+print()
+dataMiner = DocDataMiner()
+dataMiner.mine()
